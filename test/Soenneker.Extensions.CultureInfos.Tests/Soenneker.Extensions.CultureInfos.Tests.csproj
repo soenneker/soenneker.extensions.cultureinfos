@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Extensions.CultureInfos.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Extensions.CultureInfos\Soenneker.Extensions.CultureInfos.csproj" />
     </ItemGroup>
 
     <ItemGroup>
