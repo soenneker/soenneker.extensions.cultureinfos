@@ -1,11 +1,10 @@
-﻿using Soenneker.Tests.Unit;
-using Xunit;
+using Soenneker.Tests.Unit;
 
 namespace Soenneker.Extensions.CultureInfos.Tests;
 
 public sealed class CultureInfosExtensionTests : UnitTest
 {
-    [Fact]
+    [Test]
     public void Default()
     {
 
