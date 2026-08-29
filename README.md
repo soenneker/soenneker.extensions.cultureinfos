@@ -4,10 +4,26 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.cultureinfos/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.cultureinfos/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.CultureInfos
-### A collection of helpful CultureInfo extension methods
+
+A collection of helpful CultureInfo extension methods.
 
 ## Installation
 
-```
+```bash
 dotnet add package Soenneker.Extensions.CultureInfos
 ```
+
+## Quick start
+
+```csharp
+using Soenneker.Extensions.CultureInfos;
+
+// Given an existing CultureInfo named culture:
+var result = culture.UsesFriSatWeekend();
+```
+
+## Common operations
+
+- `UsesFriSatWeekend()` - Returns `true` if the culture’s weekend is Friday + Saturday .
+- `IsWeekendDay()` - Fast check—no heap work.
+- `GetWeekendDays()` - Returns a shared cached `IReadOnlySet<DayOfWeek>` for the culture's weekend; treat the returned set as immutable.
