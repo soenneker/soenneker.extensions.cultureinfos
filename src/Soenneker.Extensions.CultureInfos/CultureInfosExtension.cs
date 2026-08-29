@@ -24,6 +24,7 @@ public static class CultureInfosExtension
     ];
 
     /// <summary>Returns <c>true</c> if the culture’s weekend is <b>Friday + Saturday</b>.</summary>
+    /// <returns><c>true</c> if the culture’s weekend is <b>Friday + Saturday</b>.</returns>
     [Pure]
     public static bool UsesFriSatWeekend(this CultureInfo culture)
     {
@@ -36,6 +37,7 @@ public static class CultureInfosExtension
     }
 
     /// <summary>Fast check—no heap work.</summary>
+    /// <returns>Fast check—no heap work.</returns>
     [Pure]
     public static bool IsWeekendDay(this CultureInfo culture, DayOfWeek day) => culture.UsesFriSatWeekend()
         ? day is DayOfWeek.Friday or DayOfWeek.Saturday
@@ -45,6 +47,7 @@ public static class CultureInfosExtension
     /// Shared, read‑only weekend set (treat as immutable!).
     /// No per‑call allocations; returns a cached <see cref="IReadOnlySet{T}"/>.
     /// </summary>
+    /// <returns>Shared, read‑only weekend set (treat as immutable!). No per‑call allocations; returns a cached <see cref="IReadOnlySet{T}"/>.</returns>
     [Pure]
     public static IReadOnlySet<DayOfWeek> GetWeekendDays(this CultureInfo culture) => culture.UsesFriSatWeekend() ? _friSat : _satSun;
 }
