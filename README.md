@@ -5,7 +5,7 @@
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.CultureInfos
 
-A collection of helpful CultureInfo extension methods.
+Classifies a `CultureInfo` into a Friday–Saturday or Saturday–Sunday weekend pattern and checks days against that pattern.
 
 ## Installation
 
@@ -13,17 +13,30 @@ A collection of helpful CultureInfo extension methods.
 dotnet add package Soenneker.Extensions.CultureInfos
 ```
 
-## Quick start
+## Usage
 
 ```csharp
+using System.Globalization;
 using Soenneker.Extensions.CultureInfos;
 
-// Given an existing CultureInfo named culture:
-var result = culture.UsesFriSatWeekend();
+CultureInfo culture = CultureInfo.GetCultureInfo("ar-SA");
+
+bool usesFridaySaturday = culture.UsesFriSatWeekend();
+bool fridayIsWeekend = culture.IsWeekendDay(DayOfWeek.Friday);
+IReadOnlySet<DayOfWeek> weekend = culture.GetWeekendDays();
 ```
 
-## Common operations
+`GetWeekendDays()` returns a shared immutable set. It is safe to cache and cannot be cast back to a mutable `HashSet` to alter results globally.
 
-- `UsesFriSatWeekend()` - Returns `true` if the culture’s weekend is Friday + Saturday .
-- `IsWeekendDay()` - Fast check—no heap work.
-- `GetWeekendDays()` - Returns a shared cached `IReadOnlySet<DayOfWeek>` for the culture's weekend; treat the returned set as immutable.
+## Classification rules
+
+The Friday–Saturday pattern is selected for:
+
+- Culture names beginning with `ar-`
+- `he-IL`
+- `fa-IR`
+- `ur-PK`
+
+Every other culture uses Saturday–Sunday. Matching is case-insensitive.
+
+These are fixed package rules, not data from an official holiday calendar. They do not account for public holidays, historical changes, employer-specific schedules, or regional exceptions within the same language. For payroll, settlement, compliance, or other date-sensitive business rules, use a maintained calendar source for the relevant jurisdiction.
